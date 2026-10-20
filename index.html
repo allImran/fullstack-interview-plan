@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Full-stack interview plan</title>
+<meta name="description" content="A precise, interview-focused full-stack study plan: networking, browser, JavaScript, TypeScript, React, Next.js, Node, databases, system design, testing, Git, DevOps and AI. 1-month and 2-month schedules.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF0F5; --surface:#FFFFFF; --ink:#18202E; --muted:#566074; --line:#D3D9E3;
+  --accent:#3540B8; --accent-ink:#FFFFFF; --teal:#0C7C6E; --star:#9A5B05; --code-bg:#E4E8F1;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161F; --surface:#1A212D; --ink:#E3E8F1; --muted:#9AA4B5; --line:#2C3545;
+    --accent:#9AA3FF; --accent-ink:#11161F; --teal:#4FC7B5; --star:#E2A847; --code-bg:#252E3D;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161F; --surface:#1A212D; --ink:#E3E8F1; --muted:#9AA4B5; --line:#2C3545;
+  --accent:#9AA3FF; --accent-ink:#11161F; --teal:#4FC7B5; --star:#E2A847; --code-bg:#252E3D;
+  color-scheme: dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px);scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+a{color:var(--accent)}
+code{font-family:var(--mono);font-size:.84em;background:var(--code-bg);padding:.08em .35em;border-radius:4px;white-space:nowrap}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+img{max-width:100%}
+
+/* top bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1080px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:16px}
+.bar b{font-family:var(--display);font-weight:800;font-size:1.05rem;white-space:nowrap}
+.meter{flex:1;display:flex;align-items:center;gap:10px;min-width:0}
+.track{flex:1;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.fill{height:100%;width:0;background:var(--teal);transition:width .3s}
+.count{font-size:.85rem;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.btn{font:inherit;font-size:.85rem;border:1px solid var(--line);background:transparent;color:var(--ink);padding:5px 11px;border-radius:7px;cursor:pointer}
+.btn:hover{border-color:var(--ink)}
+
+main{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+section{margin-top:72px}
+h1,h2,h3{font-family:var(--display);line-height:1.1;margin:0}
+h1{font-size:clamp(2.6rem,7vw,4.8rem);font-weight:800;letter-spacing:-.025em;max-width:13ch;margin-top:56px}
+h2{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;letter-spacing:-.015em}
+h3{font-size:1.25rem;font-weight:700}
+.lede{font-size:1.2rem;max-width:62ch;color:var(--muted);margin:20px 0 0}
+.sub{color:var(--muted);max-width:66ch;margin:10px 0 0}
+p{max-width:70ch}
+
+/* stack map: the signature element */
+.stack{margin-top:44px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+.layer{display:grid;grid-template-columns:150px 1fr 64px;align-items:center;gap:16px;padding:12px 18px;border-top:1px solid var(--line);text-decoration:none;color:var(--ink);position:relative}
+.layer:first-child{border-top:0}
+.layer::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--hue)}
+.layer:hover{background:color-mix(in srgb,var(--hue) 9%,transparent)}
+.layer .ln{font-family:var(--display);font-weight:700;font-size:1.05rem}
+.layer .lt{font-size:.92rem;color:var(--muted)}
+.layer .lp{font-size:.82rem;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.stack-cap{font-size:.88rem;color:var(--muted);margin-top:10px}
+@media (max-width:640px){.layer{grid-template-columns:1fr auto;gap:2px 10px}.layer .lt{grid-column:1/-1;grid-row:2}.layer .lp{grid-row:1;grid-column:2}}
+
+/* principles */
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;margin-top:28px}
+.rules div{border-left:3px solid var(--accent);padding-left:16px}
+.rules h3{font-size:1.08rem;margin-bottom:6px}
+.rules p{margin:0;color:var(--muted);font-size:.97rem}
+
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+.tw{overflow-x:auto;margin-top:22px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+th,td{text-align:left;padding:10px 14px;border-top:1px solid var(--line);vertical-align:top}
+thead th{border-top:0;font-family:var(--display);font-weight:700;background:color-mix(in srgb,var(--accent) 7%,var(--surface))}
+td:first-child{font-weight:700;white-space:nowrap}
+
+/* plan tabs */
+.tabs{display:inline-flex;margin-top:24px;border:1px solid var(--line);border-radius:10px;padding:4px;background:var(--surface)}
+.tabs button{font:inherit;font-weight:700;border:0;background:transparent;color:var(--muted);padding:8px 18px;border-radius:7px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.plan-note{margin-top:18px;color:var(--muted);max-width:70ch}
+.week{margin-top:30px;display:grid;grid-template-columns:110px 1fr;gap:20px;border-top:2px solid var(--ink);padding-top:16px}
+.week .wn{font-family:var(--display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent)}
+.week .wn small{display:block;font-size:.85rem;font-weight:700;color:var(--muted);margin-top:6px}
+.week h3{font-size:1.35rem}
+.week .goal{color:var(--muted);margin:4px 0 12px}
+.days{list-style:none;margin:0;padding:0}
+.days li{display:grid;grid-template-columns:24px 64px 1fr;gap:10px;padding:8px 0;border-top:1px dashed var(--line);align-items:start}
+.days li:first-child{border-top:0}
+.days .dl{font-weight:700;font-size:.9rem;color:var(--muted);padding-top:1px}
+.deliv{margin-top:10px;font-size:.95rem;padding:10px 14px;background:color-mix(in srgb,var(--teal) 10%,var(--surface));border-radius:8px}
+.deliv b{color:var(--teal)}
+@media (max-width:640px){.week{grid-template-columns:1fr;gap:6px}.week .wn{font-size:1.8rem}.days li{grid-template-columns:24px 1fr}.days .dl{grid-column:2}.days li > span:last-child{grid-column:2}}
+
+/* topics */
+.topic{margin-top:18px;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.topic summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:8px 1fr auto;gap:16px;align-items:center;padding:16px 18px 16px 0}
+.topic summary::-webkit-details-marker{display:none}
+.topic summary .hue{align-self:stretch;background:var(--hue);margin:-16px 0}
+.topic summary h3{font-size:1.3rem}
+.topic summary .why{display:block;font-family:var(--body);font-size:.93rem;color:var(--muted);font-weight:400;margin-top:4px;line-height:1.4}
+.topic summary .tp{font-size:.82rem;color:var(--muted);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.topic summary .tp::after{content:"＋";display:block;font-size:1.2rem;color:var(--ink);line-height:1.4}
+.topic[open] summary .tp::after{content:"－"}
+.tbody{padding:4px 22px 22px 26px;border-top:1px solid var(--line)}
+.tbody h4{font-family:var(--display);font-size:1rem;margin:20px 0 8px}
+.checks{list-style:none;margin:0;padding:0;columns:2 360px;column-gap:32px}
+.checks li{break-inside:avoid;padding:4px 0}
+label.ck{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:start;cursor:pointer}
+input[type=checkbox]{width:18px;height:18px;margin:3px 0 0;accent-color:var(--teal);cursor:pointer}
+input:checked + span{color:var(--muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--muted) 60%,transparent)}
+.qs{margin:0;padding-left:20px}
+.qs li{padding:3px 0}
+.qs li.hot::marker{content:"★ ";color:var(--star)}
+.build{margin-top:16px;padding:12px 16px;border:1px dashed var(--teal);border-radius:8px;font-size:.96rem}
+.build b{color:var(--teal)}
+
+.gtk{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 32px;margin-top:24px}
+.gtk div{padding:12px 0;border-top:1px solid var(--line)}
+.gtk b{display:block;font-family:var(--display);font-size:1.02rem}
+.gtk span{color:var(--muted);font-size:.94rem}
+
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;margin-top:24px}
+.cols ol,.cols ul{padding-left:20px;margin:8px 0 0}
+.cols li{padding:3px 0}
+footer{max-width:1080px;margin:0 auto;padding:30px 20px 50px;color:var(--muted);font-size:.88rem;border-top:1px solid var(--line)}
+.legend{font-size:.9rem;color:var(--muted);margin-top:12px}
+.legend .s{color:var(--star)}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <b>FS·Prep</b>
+    <div class="meter" aria-live="polite">
+      <div class="track" role="progressbar" aria-label="Overall progress" aria-valuemin="0" aria-valuemax="100" id="ptrack"><div class="fill" id="pfill"></div></div>
+      <span class="count" id="pcount">0 / 0</span>
+    </div>
+    <button class="btn" id="theme" type="button" aria-label="Toggle light and dark theme">◐</button>
+    <button class="btn" id="reset" type="button">Reset</button>
+  </div>
+</div>
+
+<main>
+  <header>
+    <h1>Full-stack interview plan</h1>
+    <p class="lede">From Vue/Nuxt frontend developer to full-stack engineer. Learn the concepts underneath every tool, so any framework is just new syntax over things you already understand. Tick items as you master them; progress is saved in this browser.</p>
+
+    <nav class="stack" id="stack" aria-label="Topics by layer of the stack"></nav>
+    <p class="stack-cap">The stack, top to bottom: a request travels down through these layers and back up. Tap a layer to jump to it.</p>
+  </header>
+
+  <section id="rules">
+    <h2>How to study for this</h2>
+    <div class="rules">
+      <div><h3>Concepts over tools</h3><p>Interviewers switch stacks freely. If you can explain caching, transactions or rendering strategies, Prisma vs Drizzle or Next vs Nuxt is a detail.</p></div>
+      <div><h3>Say it out loud</h3><p>Knowing is not answering. For every ★ question, give a 60–90 second spoken answer. Record yourself once a week.</p></div>
+      <div><h3>Build to prove it</h3><p>One capstone app grows through the plan. Every topic adds a feature you can demo and defend in a project deep-dive.</p></div>
+      <div><h3>Daily DSA, small doses</h3><p>45 minutes a day beats a weekend binge. Learn patterns, not solutions; aim for 40 problems in one month or 75 in two.</p></div>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Tool you used</th><th>The core it sits on (what interviews actually test)</th></tr></thead>
+        <tbody>
+          <tr><td>Vue / React</td><td>Component model, reactivity vs re-render model, state, props, lifecycle, reconciliation</td></tr>
+          <tr><td>Nuxt / Next</td><td>CSR, SSR, SSG, ISR, hydration, routing, server/client boundary, caching</td></tr>
+          <tr><td>Express / Node</td><td>HTTP, middleware pipeline, event loop, non-blocking I/O, error handling</td></tr>
+          <tr><td>Postgres / Mongo</td><td>Data modeling, normalization, indexes, transactions, consistency, query plans</td></tr>
+          <tr><td>Prisma / Drizzle</td><td>SQL, migrations, N+1, connection pooling, when to drop to raw SQL</td></tr>
+          <tr><td>Any AI SDK</td><td>Tokens, prompts, tool calling, embeddings, RAG, streaming, evals, injection</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="plans">
+    <h2>The schedule</h2>
+    <p class="sub">Pick the plan that matches your interview date. Both cover every topic; the two-month plan goes deeper and leaves room for more practice.</p>
+    <div class="tabs" role="tablist" aria-label="Plan length">
+      <button role="tab" id="tab-1" aria-selected="true" aria-controls="plan-view" data-plan="one">1 month</button>
+      <button role="tab" id="tab-2" aria-selected="false" aria-controls="plan-view" data-plan="two">2 months</button>
+    </div>
+    <div id="plan-view" role="tabpanel"></div>
+  </section>
+
+  <section id="syllabus">
+    <h2>The syllabus</h2>
+    <p class="sub">Every topic has a must-know checklist, the questions interviewers actually ask, and a small build that proves you understand it.</p>
+    <p class="legend"><span class="s">★</span> marks the questions that come up in almost every full-stack loop.</p>
+    <div id="topics"></div>
+  </section>
+
+  <section id="good-to-know">
+    <h2>Good to know</h2>
+    <p class="sub">Not required to pass most loops, but a sentence or two of awareness on each makes you sound senior. Read a summary, don’t go deep.</p>
+    <div class="gtk" id="gtk"></div>
+  </section>
+
+  <section id="interview-kit">
+    <h2>Interview day kit</h2>
+    <div class="cols">
+      <div>
+        <h3>Coding round</h3>
+        <ol>
+          <li>Repeat the problem in your own words; ask about input size, edge cases, constraints.</li>
+          <li>Walk through one example by hand.</li>
+          <li>State the brute force and its Big-O.</li>
+          <li>Find the pattern (hash map, two pointers, window, BFS…) and optimize.</li>
+          <li>Code while narrating; use clear names.</li>
+          <li>Test with the example, then edge cases: empty, one item, duplicates, negatives.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>System design round</h3>
+        <ol>
+          <li>Requirements: functional, then non-functional (scale, latency, consistency).</li>
+          <li>Rough numbers: users, requests per second, storage.</li>
+          <li>API endpoints and data model.</li>
+          <li>High-level diagram: client, CDN, load balancer, services, DB, cache, queue.</li>
+          <li>Deep dive on the hardest part the interviewer cares about.</li>
+          <li>Bottlenecks, failure modes and trade-offs; say what you’d change at 10× scale.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Questions to ask them</h3>
+        <ul>
+          <li>What does a typical week look like for this role?</li>
+          <li>How does code get from a branch to production?</li>
+          <li>How do you test, and who owns quality?</li>
+          <li>What’s the biggest technical problem the team faces this year?</li>
+          <li>How are product decisions made, and how much input do engineers have?</li>
+          <li>What would make someone successful here after six months?</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Progress is stored only in this browser. Plan built for a frontend-to-full-stack move with a 1–2 month runway.
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- data ---------- */
+const LAYERS = [
+  {id:"network", name:"Network", hue:"#3B6FD8"},
+  {id:"browser", name:"Browser", hue:"#5A55D6"},
+  {id:"language", name:"Language", hue:"#8A4FCF"},
+  {id:"frontend", name:"Frontend", hue:"#B4468F"},
+  {id:"backend", name:"Backend", hue:"#C9573A"},
+  {id:"data", name:"Data", hue:"#B9800F"},
+  {id:"architecture", name:"Architecture", hue:"#6E8F1E"},
+  {id:"craft", name:"Craft", hue:"#1E9563"},
+  {id:"ops", name:"Ops", hue:"#178A8F"},
+  {id:"ai", name:"AI", hue:"#2D84B5"},
+  {id:"you", name:"You", hue:"#6B7385"}
+];
+
+const TOPICS = [
+{ id:"net", layer:"network", title:"Networking & HTTP", why:"How data actually travels. The base of the most-asked question in web interviews.",
+  must:[
+   "OSI vs TCP/IP model; where IP, TCP/UDP, TLS and HTTP sit",
+   "TCP vs UDP: 3-way handshake, ordering, retransmission, congestion control",
+   "DNS lookup chain: browser cache → OS → resolver → root → TLD → authoritative; A, AAAA, CNAME, MX, TXT; TTL",
+   "HTTP methods: safe vs idempotent (`GET` `PUT` `DELETE` idempotent, `POST` not, `PATCH` not guaranteed)",
+   "Status codes: 200, 201, 204, 301/302/307/308, 304, 400, 401 vs 403, 404, 409, 422, 429, 500, 502, 503, 504",
+   "HTTP/1.1 vs HTTP/2 (multiplexing, header compression) vs HTTP/3 (QUIC over UDP, no TCP head-of-line blocking)",
+   "TLS 1.3 handshake: certificate and CA chain, key exchange, symmetric session keys",
+   "Key headers: `Cache-Control`, `ETag` / `If-None-Match`, `Content-Type`, `Authorization`, `Set-Cookie` flags",
+   "Cookie flags: `HttpOnly`, `Secure`, `SameSite` (Strict / Lax / None), `Domain`, `Path`",
+   "CORS: same-origin policy, preflight `OPTIONS`, `Access-Control-Allow-*`, credentials",
+   "Real-time options: polling, long polling, Server-Sent Events, WebSockets",
+   "REST vs GraphQL vs gRPC vs tRPC: when each fits",
+   "Forward proxy vs reverse proxy; L4 vs L7 load balancer; CDN and edge caching"
+  ],
+  qs:[
+   ["What happens when you type a URL and press Enter? Go as deep as you can.",1],
+   ["401 vs 403? PUT vs PATCH? Is POST idempotent?",1],
+   ["Why does the API work in Postman but fail with a CORS error in the browser?",1],
+   ["WebSockets or SSE for a chat app? For a live notifications feed?",0],
+   ["How does HTTPS keep data private and prove the server is who it claims?",0]
+  ],
+  build:"Open DevTools → Network on any site and explain every timing phase of one request: queueing, DNS, connect, TLS, TTFB, download." },
+
+{ id:"browser", layer:"browser", title:"How the browser works", why:"Rendering, the event loop and web security. Frontend depth that backend-heavy candidates lack.",
+  must:[
+   "Critical rendering path: HTML → DOM, CSS → CSSOM, render tree, layout, paint, composite",
+   "Render-blocking CSS and JS; `<script>` `async` vs `defer` vs `type=module`",
+   "Reflow vs repaint; why animating `transform` and `opacity` is cheap",
+   "Event loop: call stack, microtasks (promises) run before the next macrotask (`setTimeout`, I/O); `requestAnimationFrame`",
+   "Event propagation: capture, target, bubble; event delegation; `preventDefault` vs `stopPropagation`",
+   "Storage: cookies vs `localStorage` vs `sessionStorage` vs IndexedDB (size, lifetime, sent to server or not)",
+   "Origin = scheme + host + port; same-origin policy",
+   "Caching layers: memory/disk cache, HTTP cache, service worker, CDN",
+   "Core Web Vitals: LCP, INP (replaced FID in 2024), CLS and what improves each",
+   "XSS (stored, reflected, DOM), CSRF, clickjacking; defenses: escaping, CSP, `SameSite`, `frame-ancestors`"
+  ],
+  qs:[
+   ["Predict the output order: console.log, setTimeout(0), Promise.resolve().then, queueMicrotask.",1],
+   ["Where would you store an auth token in the browser, and why?",1],
+   ["async vs defer?",0],
+   ["A page has a slow LCP. How do you find and fix the cause?",1],
+   ["How would you prevent XSS in an app that renders user comments?",0]
+  ],
+  build:"Run Lighthouse on one of your projects, fix three issues, and write down the before/after numbers. That becomes an interview story." },
+
+{ id:"js", layer:"language", title:"JavaScript core", why:"The most tested language topic for any JS full-stack role, frontend or backend.",
+  must:[
+   "`var` / `let` / `const`, block vs function scope, hoisting, temporal dead zone",
+   "Closures and their real uses: private state, factories, memoization, stale-closure bugs",
+   "`this` rules: default, implicit, explicit (`call` / `apply` / `bind`), `new`, arrow functions",
+   "Prototypes and the prototype chain; `class` as syntax over prototypes",
+   "Promises, `async`/`await`, error handling; `Promise.all` / `allSettled` / `race` / `any`",
+   "`==` vs `===`, type coercion, truthy/falsy, `NaN`, `typeof null`",
+   "Value vs reference; shallow vs deep copy; `structuredClone`",
+   "`map` / `filter` / `reduce`; immutable updates with spread",
+   "Higher-order functions, currying, pure functions, side effects",
+   "ES modules vs CommonJS; tree-shaking",
+   "Garbage collection and common leaks: listeners, timers, detached DOM, global caches",
+   "Write from scratch: `debounce`, `throttle`, `deepClone`, `Promise.all`, `curry`, `memoize`, event emitter, `Array.prototype.map`"
+  ],
+  qs:[
+   ["What is a closure? Show one bug it causes and one problem it solves.",1],
+   ["Implement debounce. Now throttle. What’s the difference in behavior?",1],
+   ["Explain the event loop to a junior developer.",1],
+   ["Promise.all vs Promise.allSettled: when does each make sense?",0],
+   ["What does this point to inside an arrow function vs a regular method?",0]
+  ],
+  build:"Create a `utils/` folder with 10 hand-written polyfills and utilities, each with a few unit tests." },
+
+{ id:"ts", layer:"language", title:"TypeScript", why:"Expected in almost every modern full-stack job description.",
+  must:[
+   "`type` vs `interface`; union and intersection types; literal types",
+   "Narrowing: `typeof`, `in`, `instanceof`, discriminated unions, custom type guards",
+   "Generics with constraints (`<T extends …>`)",
+   "Utility types: `Partial`, `Required`, `Pick`, `Omit`, `Record`, `ReturnType`, `Awaited`",
+   "`any` vs `unknown` vs `never`",
+   "`keyof`, `typeof`, indexed access; basics of mapped and conditional types",
+   "Types vanish at runtime: validate external data with Zod and infer types from schemas",
+   "Sharing types between client and server (monorepo package, tRPC, or schema-first)"
+  ],
+  qs:[
+   ["unknown vs any: which do you use for an API response, and why?",1],
+   ["Why do you still need Zod if you already use TypeScript?",1],
+   ["Write a generic function that groups an array of objects by a key.",0]
+  ],
+  build:"Type one full API flow end to end: Zod schema → inferred type → server handler → typed client fetch." },
+
+{ id:"htmlcss", layer:"frontend", title:"HTML, CSS & accessibility", why:"Quick wins. Often asked in a few rapid-fire questions; easy to lose points on.",
+  must:[
+   "Semantic HTML and landmarks; forms with proper labels",
+   "Accessibility: alt text, keyboard navigation, focus management, contrast; ARIA only when native HTML can’t",
+   "Box model, `box-sizing`, margin collapse",
+   "Specificity, cascade, inheritance, cascade layers",
+   "Positioning (relative, absolute, fixed, sticky) and stacking contexts / `z-index`",
+   "Flexbox vs Grid and when each fits",
+   "Responsive design: mobile-first, media and container queries, relative units",
+   "Styling approaches: CSS Modules vs Tailwind vs CSS-in-JS trade-offs"
+  ],
+  qs:[
+   ["Center an element three different ways.",0],
+   ["Why isn’t my z-index working?",0],
+   ["How do you make a modal accessible?",1],
+   ["Flexbox or Grid for a card layout? For a navbar?",0]
+  ],
+  build:"Make one page of your capstone fully keyboard-usable and pass an axe or Lighthouse accessibility audit." },
+
+{ id:"react", layer:"frontend", title:"React", why:"The dominant frontend framework in interviews. Map it to what you know from Vue.",
+  must:[
+   "Virtual DOM and reconciliation; why `key` matters and why index keys break",
+   "What triggers a re-render; state as a snapshot; automatic batching",
+   "Rules of hooks; `useState`, `useEffect` (dependencies, cleanup), `useRef`, `useMemo`, `useCallback`, `useContext`, `useReducer`",
+   "When you don’t need an effect: derived state, event handlers, data fetching libraries",
+   "Controlled vs uncontrolled inputs; forms (React Hook Form + Zod)",
+   "State placement: local, lifted, Context, store (Zustand / Redux), server state (TanStack Query)",
+   "Performance: `React.memo`, memoization, code splitting with `lazy` / `Suspense`, list virtualization",
+   "Error boundaries; custom hooks for reusable logic",
+   "React 18/19: concurrent rendering, transitions, Suspense, Server Components, Actions",
+   "Vue vs React: proxy-based fine-grained reactivity vs component re-render; `computed` ≈ `useMemo`, `watch` ≈ `useEffect`"
+  ],
+  qs:[
+   ["Why does React need keys in lists?",1],
+   ["Explain useEffect cleanup and the dependency array.",1],
+   ["useMemo vs useCallback vs React.memo: when is each worth it?",1],
+   ["How do you fetch data and avoid race conditions when the input changes quickly?",0],
+   ["You know Vue. How is React’s mental model different?",0]
+  ],
+  build:"A typeahead search: debounced input, `AbortController` to cancel stale requests, loading/error/empty states, keyboard navigation." },
+
+{ id:"next", layer:"frontend", title:"Next.js & rendering strategies", why:"Rendering trade-offs are a favorite senior-signal question. Your Nuxt experience transfers directly.",
+  must:[
+   "CSR vs SSR vs SSG vs ISR vs streaming: trade-offs for SEO, speed and cost",
+   "Hydration and the causes of hydration mismatch",
+   "App Router: layouts, server vs client components (`\"use client\"`), route handlers, server actions",
+   "Data fetching, caching and revalidation (time-based, on-demand by path or tag)",
+   "Middleware for auth redirects; edge vs Node runtime",
+   "Image and font optimization; metadata and SEO",
+   "Nuxt mapping: `useFetch` / `useAsyncData` ≈ server data fetching; Nitro server routes ≈ route handlers"
+  ],
+  qs:[
+   ["SSR or SSG for a blog? For a logged-in dashboard? For a product page?",1],
+   ["What is a Server Component and what can’t it do?",1],
+   ["What causes a hydration error and how do you fix one?",0]
+  ],
+  build:"Use at least three rendering modes in your capstone (static marketing page, SSR dashboard, client-only widget) and explain why each." },
+
+{ id:"node", layer:"backend", title:"Node.js & server architecture", why:"Proves you can own the server side, not just call it.",
+  must:[
+   "Node architecture: V8 + libuv, single JS thread, non-blocking I/O, libuv thread pool",
+   "Node event loop phases (timers, poll, check); `process.nextTick` vs `setImmediate`",
+   "Blocking the event loop; offload CPU work to `worker_threads`; scale with processes / cluster",
+   "Streams, piping and backpressure; Buffers",
+   "Express: middleware chain, `next()`, error middleware with 4 arguments, routers",
+   "Layered structure: routes → controllers → services → data access (repositories)",
+   "Validation at the boundary, centralized error handling, catching async errors",
+   "Config via environment variables; secrets; graceful shutdown",
+   "Structured logging (pino), request IDs, health-check endpoint",
+   "File uploads: multipart vs presigned URLs to object storage",
+   "Background jobs and queues (BullMQ on Redis), retries, scheduled jobs"
+  ],
+  qs:[
+   ["Is Node single-threaded? What actually runs in parallel?",1],
+   ["How would you handle a CPU-heavy task like image processing?",1],
+   ["How do you structure a REST API project, and why?",1],
+   ["How do you handle errors thrown inside async Express routes?",0]
+  ],
+  build:"Rebuild your capstone API with clean layers, Zod validation, a central error handler, logging and one background job." },
+
+{ id:"api", layer:"backend", title:"API design", why:"Shows judgment. Almost every loop includes ‘design the API for…’.",
+  must:[
+   "Resource naming, nesting, plural nouns, correct methods and status codes",
+   "Pagination: offset vs cursor (and why cursor wins for feeds)",
+   "Filtering, sorting, field selection; versioning (`/v1` or headers)",
+   "Idempotency keys for retries and payments",
+   "Consistent error shape (e.g. problem+json)",
+   "Rate limiting: token bucket, sliding window; `429` + `Retry-After`",
+   "GraphQL: schema, resolvers, N+1 and DataLoader",
+   "Webhooks: signatures, retries, idempotent handlers",
+   "Documenting with OpenAPI"
+  ],
+  qs:[
+   ["Design the API for a shopping cart and checkout.",1],
+   ["Offset vs cursor pagination?",1],
+   ["A client retries a payment request after a timeout. How do you avoid charging twice?",0]
+  ],
+  build:"Write an OpenAPI spec for your capstone and add cursor pagination plus a rate limiter." },
+
+{ id:"auth", layer:"backend", title:"Authentication & security", why:"Asked in nearly every full-stack loop. Mistakes here are disqualifying.",
+  must:[
+   "Authentication vs authorization; RBAC vs ABAC",
+   "Sessions (server state + cookie) vs JWT (stateless): trade-offs, revocation",
+   "Access + refresh tokens, refresh rotation, storing tokens in `HttpOnly` cookies",
+   "OAuth 2.0 authorization code flow + PKCE; OpenID Connect adds identity (ID token)",
+   "Password hashing with bcrypt or argon2 and salts; hashing vs encryption vs encoding",
+   "OWASP Top 10: broken access control, injection, XSS, SSRF, misconfiguration",
+   "SQL injection and parameterized queries",
+   "CSRF defenses: `SameSite` cookies, CSRF tokens",
+   "Secrets management, least privilege, HTTPS everywhere, security headers"
+  ],
+  qs:[
+   ["Walk me through a login flow with JWTs, including refresh.",1],
+   ["How does ‘Sign in with Google’ work under the hood?",1],
+   ["Sessions or JWT for this app? Defend your choice.",1],
+   ["Hashing vs encryption: which for passwords, which for card data?",0]
+  ],
+  build:"Implement email/password + one OAuth provider yourself (or with Auth.js / Better Auth) and be able to draw the full flow." },
+
+{ id:"db", layer:"data", title:"Databases", why:"Where most real bugs and performance problems live. Interviewers dig here.",
+  must:[
+   "SQL: `JOIN` types, `GROUP BY` / `HAVING`, subqueries, CTEs, window functions (`ROW_NUMBER`, `RANK`)",
+   "Normalization (1NF–3NF) and when to denormalize",
+   "Primary, foreign and unique keys; constraints",
+   "Indexes: B-tree, composite index column order, covering index, write cost; reading `EXPLAIN ANALYZE`",
+   "Transactions and ACID; isolation levels and anomalies (dirty, non-repeatable, phantom reads)",
+   "Optimistic vs pessimistic locking",
+   "The N+1 query problem and fixes",
+   "ORMs: Prisma (schema-first) vs Drizzle (SQL-like TS); migrations; when to write raw SQL",
+   "MongoDB: document modeling, embed vs reference, aggregation pipeline, indexes",
+   "SQL vs NoSQL: choosing by access patterns and consistency needs",
+   "Redis: caching with TTL, sessions, rate limits, pub/sub",
+   "Connection pooling (and the serverless connection problem)",
+   "Replication, read replicas, partitioning, sharding; CAP theorem"
+  ],
+  qs:[
+   ["Write SQL: top 3 customers by total spend; the second-highest salary.",1],
+   ["How does an index speed up reads, and what does it cost?",1],
+   ["Explain ACID with a bank transfer example.",1],
+   ["When would you choose MongoDB over Postgres?",0],
+   ["A page got slow in production. How do you find the bad query?",0]
+  ],
+  build:"Seed 1M rows into Postgres, find a slow query with `EXPLAIN ANALYZE`, add the right index, measure the difference." },
+
+{ id:"sd", layer:"architecture", title:"System design", why:"Separates mid from senior. Even junior full-stack loops now include a light version.",
+  must:[
+   "Use the answer framework (see Interview day kit)",
+   "Vertical vs horizontal scaling; stateless services",
+   "Load balancing algorithms: round robin, least connections, consistent hashing",
+   "Caching at every layer: browser, CDN, app, DB; cache-aside, write-through, write-back; invalidation",
+   "Message queues, pub/sub, event-driven design; at-least-once delivery and idempotent consumers",
+   "Strong vs eventual consistency",
+   "Monolith vs microservices (start with a modular monolith)",
+   "Scaling data: replicas, sharding, partitioning",
+   "Observability: logs, metrics, traces; SLIs and SLOs",
+   "Back-of-envelope estimates: requests per second, storage per year"
+  ],
+  qs:[
+   ["Design a URL shortener.",1],
+   ["Design a rate limiter.",1],
+   ["Your app grows from 1,000 to 1,000,000 users. What breaks first and what do you change?",1],
+   ["Design a chat app / notification system / news feed.",0]
+  ],
+  build:"Draw the architecture of your capstone, then a 100× version, and explain every box you added." },
+
+{ id:"dsa", layer:"architecture", title:"Data structures & algorithms", why:"Lighter for full-stack than for pure backend roles, but you must pass easy/medium problems.",
+  must:[
+   "Big-O time and space; amortized cost",
+   "Arrays, strings, hash maps and sets",
+   "Two pointers, sliding window, prefix sums",
+   "Stacks and queues (valid parentheses, monotonic stack basics)",
+   "Linked lists: reverse, detect cycle, merge",
+   "Binary search, including on the answer space",
+   "Recursion and simple backtracking",
+   "Trees: DFS and BFS traversals, BST properties",
+   "Graphs and grids: BFS/DFS with a visited set",
+   "Heaps for top-K problems",
+   "Sorting: merge sort and quicksort complexity",
+   "Intro dynamic programming: climbing stairs, house robber, coin change"
+  ],
+  qs:[
+   ["Two Sum · Valid Parentheses · Merge Intervals",1],
+   ["Longest substring without repeating characters",1],
+   ["Group Anagrams · Top K Frequent Elements",0],
+   ["Number of Islands · Binary tree level order traversal",0],
+   ["Design an LRU cache",1]
+  ],
+  build:"Keep a log: problem, pattern, mistake you made. Re-solve anything you failed three days later." },
+
+{ id:"principles", layer:"craft", title:"Principles, patterns & common terms", why:"The vocabulary interviewers use to judge whether you write maintainable code.",
+  must:[
+   "OOP pillars: encapsulation, abstraction, inheritance, polymorphism",
+   "SOLID, with one concrete example of each from your own code",
+   "DRY, KISS, YAGNI, separation of concerns, composition over inheritance",
+   "Coupling and cohesion",
+   "Functional ideas: pure functions, immutability, side effects, higher-order functions",
+   "Patterns in JS: Singleton (module), Factory, Observer / pub-sub, Strategy, Adapter, Decorator, Middleware (chain of responsibility), Repository, Dependency injection",
+   "Clean code: naming, small functions, early returns, consistent error handling",
+   "Concurrency vs parallelism; race conditions; deadlocks",
+   "Glossary: idempotent, stateless, memoization, polyfill, transpile, bundler, tree-shaking, hydration, serialization, latency vs throughput, mutex"
+  ],
+  qs:[
+   ["Explain SOLID with examples from code you wrote.",1],
+   ["Composition vs inheritance: which and why?",0],
+   ["Which design pattern is Express middleware?",0]
+  ],
+  build:"Refactor one messy module from an old project and be ready to explain each change by principle." },
+
+{ id:"testing", layer:"craft", title:"Testing", why:"Teams hire people who ship safely. Every loop asks ‘how would you test this?’.",
+  must:[
+   "Testing pyramid / trophy; unit vs integration vs end-to-end",
+   "Vitest or Jest; React Testing Library (test behavior, not implementation)",
+   "Supertest for HTTP APIs; Playwright for end-to-end",
+   "Test doubles: mock vs stub vs spy vs fake",
+   "Arrange-Act-Assert; TDD red-green-refactor",
+   "Testing against a real database in Docker vs mocking",
+   "Mocking the network with MSW",
+   "Meaningful coverage vs vanity coverage; flaky tests and how to fix them"
+  ],
+  qs:[
+   ["What would you test in a login form?",1],
+   ["How do you test code that calls an external payment API?",1],
+   ["Unit vs integration test: give an example of each from your app.",0]
+  ],
+  build:"Add unit, integration and one end-to-end test to your capstone and run them in CI." },
+
+{ id:"git", layer:"craft", title:"Git & team workflow", why:"Small topic, asked often, and a quick signal of team experience.",
+  must:[
+   "Mental model: commits are snapshots, branches are pointers, `HEAD`",
+   "`merge` vs `rebase` (never rebase shared history); squash merges",
+   "`reset --soft` / `--mixed` / `--hard` vs `revert`",
+   "`cherry-pick`, `stash`, `reflog` for recovery, `bisect` for finding a bad commit",
+   "Resolving merge conflicts calmly",
+   "Git Flow vs GitHub Flow vs trunk-based development with feature flags",
+   "Conventional commits and semantic versioning",
+   "Pull requests: small PRs, clear descriptions, kind and specific reviews"
+  ],
+  qs:[
+   ["Merge vs rebase: when do you use each?",1],
+   ["How do you undo a commit that is already pushed?",1],
+   ["You committed to the wrong branch. Fix it.",0]
+  ],
+  build:"Use a feature-branch + PR workflow on your capstone, with conventional commits and a protected main branch." },
+
+{ id:"ops", layer:"ops", title:"Servers, Docker, CI/CD & deployment", why:"Full-stack means you can get it to production and keep it running.",
+  must:[
+   "Linux basics: processes, ports, permissions, SSH, environment variables",
+   "Docker: image vs container, layers and cache, multi-stage builds, Docker Compose",
+   "CI/CD with GitHub Actions: lint → test → build → deploy",
+   "Reverse proxy (Nginx), TLS certificates (Let’s Encrypt)",
+   "Hosting models: VPS vs PaaS vs serverless vs edge; cold starts",
+   "Environments (dev / staging / prod) and the 12-factor app",
+   "Monitoring: logs, metrics, alerts, error tracking (Sentry), uptime checks",
+   "Deployment strategies: rolling, blue-green, canary; rollback; feature flags",
+   "Cloud building blocks: object storage, managed database, CDN, secrets manager"
+  ],
+  qs:[
+   ["Walk me through deploying a Node + Postgres app from scratch.",1],
+   ["What is a multi-stage Docker build and why use it?",0],
+   ["Serverless: pros, cons and when you’d avoid it.",1]
+  ],
+  build:"Dockerize the capstone, add a GitHub Actions pipeline, and deploy it with a real domain and HTTPS." },
+
+{ id:"ai", layer:"ai", title:"AI engineering core", why:"Now asked in most product-company loops. You need to integrate models, not train them.",
+  must:[
+   "LLM basics: tokens, context window, temperature, system vs user messages, non-determinism",
+   "Prompting: clear instructions, examples (few-shot), structured JSON output with a schema",
+   "Streaming responses to the UI",
+   "Tool / function calling: the model asks for a tool, your code runs it, you return the result",
+   "Embeddings, semantic search, cosine similarity; vector stores (pgvector, Pinecone)",
+   "RAG pipeline: chunk → embed → store → retrieve → add to prompt → generate with citations",
+   "Agents: loop of reason → tool call → observe; MCP for connecting tools and data",
+   "Hallucinations and mitigations: grounding, retrieval, output validation",
+   "Evals: test sets, LLM-as-judge, regression tests for prompts",
+   "Cost and latency: token counts, prompt caching, smaller models, batching",
+   "Safety: prompt injection, never trust model output, keep keys server-side, handle PII",
+   "SDKs: Vercel AI SDK, OpenAI and Anthropic SDKs"
+  ],
+  qs:[
+   ["How would you add ‘chat with your documents’ to an existing app?",1],
+   ["RAG vs fine-tuning: when would you choose each?",1],
+   ["How do you defend against prompt injection?",0],
+   ["How do you stream an LLM response into a React UI?",0]
+  ],
+  build:"Add a RAG assistant to the capstone: Postgres + pgvector, streaming answers, source citations, and a 10-question eval set." },
+
+{ id:"behavioral", layer:"you", title:"Your story & behavioral", why:"Often the deciding round. Your transition is a strength if you tell it well.",
+  must:[
+   "A 60-second intro: Vue/Nuxt frontend → building your own products → full stack",
+   "Frame the self-built software as ownership: you designed, built, deployed and maintained it",
+   "Six STAR stories: hardest bug, proudest project, disagreement, failure, tight deadline, learning fast",
+   "One project you can deep-dive for 20 minutes: architecture, trade-offs, what you’d change",
+   "Numbers in every story where possible (load time, users, hours saved)",
+   "Three thoughtful questions for each interviewer"
+  ],
+  qs:[
+   ["Tell me about yourself.",1],
+   ["Why full stack, and why now?",1],
+   ["Describe a technical decision you regret and what you learned.",0]
+  ],
+  build:"Write your intro and six STAR stories in a doc; rehearse them aloud until they’re natural, not memorized." }
+];
+
+const PLANS = {
+ one:{
+  note:"About 3–4 focused hours a day, six days a week plus one review day. Every day also includes 45 minutes of DSA (about 40 problems by the end). One capstone app grows through the month: Next.js + Node/Express or route handlers + Postgres (Drizzle or Prisma) + Redis + auth + tests + Docker + an AI feature.",
+  weeks:[
+   {t:"Foundations", g:"Network, browser and the language. The ‘what happens when…’ week.", days:[
+     ["Day 1","Networking: URL journey, DNS, TCP vs UDP, HTTP methods and status codes"],
+     ["Day 2","HTTPS/TLS, HTTP/2 and 3, caching headers, cookies, CORS"],
+     ["Day 3","Browser: rendering path, event loop, storage, Web Vitals, XSS/CSRF"],
+     ["Day 4","JavaScript: scope, closures, this, prototypes, coercion"],
+     ["Day 5","Async JS; implement debounce, throttle, Promise.all, deepClone"],
+     ["Day 6","TypeScript essentials + HTML/CSS/accessibility rapid review"],
+     ["Day 7","Review: answer every ★ question aloud; record and replay one"]],
+    d:"Capstone repo created; typed utilities with tests; your ‘type a URL’ answer polished."},
+   {t:"Frontend frameworks & the server", g:"React and Next.js depth, then Node, APIs and auth.", days:[
+     ["Day 8","React rendering, reconciliation, keys, core hooks, effects"],
+     ["Day 9","React state, performance, patterns; build the typeahead"],
+     ["Day 10","Next.js rendering modes, Server Components, caching; map to Nuxt"],
+     ["Day 11","Node internals, Express middleware, layered architecture"],
+     ["Day 12","API design: pagination, errors, idempotency, rate limiting"],
+     ["Day 13","Auth: sessions vs JWT, refresh tokens, OAuth/OIDC, OWASP"],
+     ["Day 14","Review + one mock interview (frontend or Node questions)"]],
+    d:"Capstone has UI, API, validation, and working login."},
+   {t:"Data, design & testing", g:"Databases, system design and tests: the senior-signal week.", days:[
+     ["Day 15","SQL joins, aggregates, window functions; indexes and EXPLAIN"],
+     ["Day 16","Transactions, isolation levels, locking, N+1, ORMs and migrations"],
+     ["Day 17","MongoDB modeling, Redis caching, connection pooling"],
+     ["Day 18","System design framework + URL shortener"],
+     ["Day 19","Rate limiter + chat/notification system; queues and caching"],
+     ["Day 20","Testing: Vitest, Testing Library, Supertest, Playwright"],
+     ["Day 21","Review + one mock system design round"]],
+    d:"Capstone has a Redis cache, a background job and a test suite."},
+   {t:"Ship it, AI & you", g:"Deploy, add AI, sharpen principles and your story.", days:[
+     ["Day 22","Git deep dive and team workflows"],
+     ["Day 23","Docker, GitHub Actions CI/CD, deploy with domain + HTTPS"],
+     ["Day 24","AI core: tokens, prompting, tool calling, streaming"],
+     ["Day 25","Embeddings and RAG; add the AI feature to the capstone"],
+     ["Day 26","SOLID, patterns, glossary of common terms"],
+     ["Day 27","Behavioral: intro, six STAR stories, project deep-dive"],
+     ["Day 28","Full mock loop; fix the three weakest areas"]],
+    d:"Live, tested, AI-powered capstone with a README and architecture diagram."}
+  ]},
+ two:{
+  note:"About 2–3 hours a day. Each week has one theme, a deliverable and a self-check. DSA runs every day with one pattern per week (about 75 problems total). The extra time goes to depth, a stronger capstone and three mock interviews.",
+  weeks:[
+   {t:"Network & browser", g:"Everything between the keyboard and the server.", days:[
+     ["Mon–Tue","TCP/IP, DNS, HTTP semantics, status codes, HTTP/2 and 3, TLS"],
+     ["Wed","Caching headers, cookies, CORS, CDNs, proxies, load balancers"],
+     ["Thu–Fri","Rendering path, event loop, storage, Web Vitals"],
+     ["Sat","Web security: XSS, CSRF, CSP, clickjacking"],
+     ["Sun","Review ★ questions aloud · DSA pattern: arrays & hash maps"]],
+    d:"A written, two-minute answer to ‘what happens when you type a URL’."},
+   {t:"JavaScript & TypeScript", g:"Language mastery and live-coding confidence.", days:[
+     ["Mon–Tue","Scope, closures, this, prototypes, coercion"],
+     ["Wed","Promises, async/await, microtasks; error handling"],
+     ["Thu","Write 10–15 polyfills and utilities from scratch"],
+     ["Fri–Sat","TypeScript: narrowing, generics, utility types, Zod"],
+     ["Sun","Review · DSA pattern: two pointers & sliding window"]],
+    d:"A tested utilities package you can show in interviews."},
+   {t:"UI layer: HTML/CSS + React", g:"The frontend fundamentals behind any framework.", days:[
+     ["Mon","Semantic HTML, accessibility, box model, layout, specificity"],
+     ["Tue–Wed","React rendering, hooks, effects, state placement"],
+     ["Thu","React performance, error boundaries, custom hooks"],
+     ["Fri","React 19: Suspense, transitions, Server Components, Actions"],
+     ["Sat","Build the typeahead + an accessible modal"],
+     ["Sun","Review · DSA pattern: stacks & queues"]],
+    d:"Typeahead and modal components with tests."},
+   {t:"Next.js & frontend architecture", g:"Rendering strategies and start the capstone.", days:[
+     ["Mon–Tue","CSR/SSR/SSG/ISR/streaming, hydration, App Router"],
+     ["Wed","Data fetching, caching, revalidation, middleware"],
+     ["Thu","Frontend testing: Vitest, Testing Library, MSW"],
+     ["Fri–Sat","Capstone: set up repo, UI shell, three rendering modes"],
+     ["Sun","Mock interview #1 (frontend) · DSA: binary search"]],
+    d:"Capstone frontend deployed as a preview."},
+   {t:"Node, APIs & auth", g:"Own the server.", days:[
+     ["Mon","Node internals, event loop phases, streams, worker threads"],
+     ["Tue","Express architecture, validation, error handling, logging"],
+     ["Wed","API design: pagination, idempotency, rate limiting, OpenAPI"],
+     ["Thu–Fri","Auth: sessions, JWT + refresh, OAuth/OIDC, hashing"],
+     ["Sat","OWASP Top 10 review; secure the capstone"],
+     ["Sun","Review · DSA: linked lists & recursion"]],
+    d:"Capstone API with auth, validation and an OpenAPI spec."},
+   {t:"Data layer", g:"SQL depth, NoSQL judgment, caching.", days:[
+     ["Mon","SQL joins, aggregates, CTEs, window functions (practice 15 queries)"],
+     ["Tue","Indexes, EXPLAIN ANALYZE; the 1M-row experiment"],
+     ["Wed","Transactions, isolation, locking, N+1, ORMs and migrations"],
+     ["Thu","MongoDB modeling and aggregation"],
+     ["Fri","Redis caching, queues with BullMQ, connection pooling"],
+     ["Sat","Backend tests with Supertest and a real DB in Docker"],
+     ["Sun","Mock interview #2 (backend) · DSA: trees"]],
+    d:"Capstone has caching, a background job and integration tests."},
+   {t:"System design, Git & ops", g:"Think at scale and ship like a team.", days:[
+     ["Mon","Design framework, scaling, load balancing, caching strategies"],
+     ["Tue","URL shortener + rate limiter"],
+     ["Wed","Chat app + notification system; queues and consistency"],
+     ["Thu","Git deep dive; workflows; PR practice"],
+     ["Fri","Docker, Compose, multi-stage builds"],
+     ["Sat","GitHub Actions CI/CD, deploy with HTTPS, monitoring"],
+     ["Sun","Review · DSA: graphs & heaps"]],
+    d:"Capstone deployed through CI with an architecture diagram and a 100× version."},
+   {t:"AI, principles & the final push", g:"Modern skills, clean-code vocabulary and your story.", days:[
+     ["Mon","LLM basics, prompting, structured output, streaming"],
+     ["Tue","Tool calling, agents, MCP"],
+     ["Wed–Thu","Embeddings, pgvector, RAG feature + eval set"],
+     ["Fri","SOLID, design patterns, common terms glossary"],
+     ["Sat","Behavioral: intro, STAR stories, project deep-dive"],
+     ["Sun","Mock interview #3 (full loop) · DSA: intro DP; fix weak spots"]],
+    d:"Finished capstone with AI feature, README, tests and a story for every part of it."}
+  ]}
+};
+
+const GTK = [
+ ["Bundlers & build tools","Vite, esbuild, webpack, Turbopack; what tree-shaking and code splitting do."],
+ ["Monorepos","pnpm workspaces, Turborepo; sharing types between front and back."],
+ ["tRPC & GraphQL in depth","End-to-end types without codegen vs a typed query language."],
+ ["Web Workers & PWAs","Moving work off the main thread; service workers and offline support."],
+ ["Micro-frontends","Module federation; why most teams shouldn’t need it."],
+ ["Kubernetes basics","Pods, deployments, services; what problem it solves over plain Docker."],
+ ["Infrastructure as code","Terraform or Pulumi; reproducible environments."],
+ ["Kafka & RabbitMQ","Event streaming vs message queues; ordering and partitions."],
+ ["OpenTelemetry","Distributed tracing across services."],
+ ["Edge computing","Running code at CDN nodes; limits of edge runtimes."],
+ ["Payments","Stripe checkout, webhooks, idempotency, reconciling state."],
+ ["Search engines","Postgres full-text search vs Meilisearch / Elasticsearch."],
+ ["Real-time collaboration","CRDTs and operational transforms (Yjs)."],
+ ["Feature flags & A/B tests","Shipping dark, gradual rollouts, measuring impact."],
+ ["Internationalization","Locales, plurals, dates and currencies, RTL layouts."],
+ ["SEO fundamentals","Crawling, metadata, structured data, sitemaps."],
+ ["Alternative runtimes","Bun, Deno, Hono: what’s different from Node."],
+ ["WebAssembly","Running compiled code in the browser for heavy computation."],
+ ["Python for AI work","Enough to read notebooks and call model APIs."],
+ ["Fine-tuning & local models","When fine-tuning beats prompting; running open models locally."]
+];
+
+/* ---------- storage ---------- */
+const KEY = "fsprep-v1";
+let state = {};
+try { state = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch(e){ state = {}; }
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+/* ---------- helpers ---------- */
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const fmt = s => esc(s).replace(/`([^`]+)`/g,"<code>$1</code>");
+const layerOf = id => LAYERS.find(l => l.id === id);
+
+function checkbox(id, text){
+  const c = state[id] ? " checked" : "";
+  return `<label class="ck"><input type="checkbox" data-id="${id}"${c}><span>${fmt(text)}</span></label>`;
+}
+
+/* ---------- render topics ---------- */
+const topicsEl = document.getElementById("topics");
+topicsEl.innerHTML = TOPICS.map(t => {
+  const L = layerOf(t.layer);
+  return `<details class="topic" id="t-${t.id}" style="--hue:${L.hue}">
+    <summary><span class="hue" aria-hidden="true"></span>
+      <h3>${esc(t.title)}<span class="why">${esc(L.name)} layer. ${esc(t.why)}</span></h3>
+      <span class="tp" data-tp="${t.id}"></span></summary>
+    <div class="tbody">
+      <h4>Must know</h4>
+      <ul class="checks">${t.must.map((m,i)=>`<li>${checkbox(t.id+"-"+i,m)}</li>`).join("")}</ul>
+      <h4>Questions they ask</h4>
+      <ul class="qs">${t.qs.map(q=>`<li class="${q[1]?"hot":""}">${fmt(q[0])}</li>`).join("")}</ul>
+      <div class="build"><b>Prove it:</b> ${fmt(t.build)}</div>
+    </div></details>`;
+}).join("");
+
+/* ---------- render stack map ---------- */
+document.getElementById("stack").innerHTML = LAYERS.map(L => {
+  const ts = TOPICS.filter(t => t.layer === L.id);
+  return `<a class="layer" href="#t-${ts[0].id}" data-layer="${L.id}" style="--hue:${L.hue}">
+    <span class="ln">${L.name}</span><span class="lt">${ts.map(t=>esc(t.title)).join(", ")}</span><span class="lp" data-lp="${L.id}"></span></a>`;
+}).join("");
+document.querySelectorAll(".layer").forEach(a => a.addEventListener("click", () => {
+  const d = document.querySelector(a.getAttribute("href")); if (d) d.open = true;
+}));
+
+/* ---------- render plans ---------- */
+const planView = document.getElementById("plan-view");
+function renderPlan(which){
+  const P = PLANS[which];
+  planView.innerHTML = `<p class="plan-note">${esc(P.note)}</p>` + P.weeks.map((w,wi) => `
+    <div class="week">
+      <div class="wn">W${wi+1}<small>${which==="one" ? "Days "+(wi*7+1)+"–"+(wi*7+7) : "Week "+(wi+1)+" of 8"}</small></div>
+      <div><h3>${esc(w.t)}</h3><p class="goal">${esc(w.g)}</p>
+        <ul class="days">${w.days.map((d,di)=>{
+          const id = "p"+which+"-"+wi+"-"+di;
+          return `<li><input type="checkbox" data-id="${id}" aria-label="${esc(d[0])} done"${state[id]?" checked":""}><span class="dl">${esc(d[0])}</span><span>${fmt(d[1])}</span></li>`;
+        }).join("")}</ul>
+        <div class="deliv"><b>End of week:</b> ${esc(w.d)}</div></div>
+    </div>`).join("");
+}
+let currentPlan = state.__plan === "two" ? "two" : "one";
+function selectTab(which){
+  currentPlan = which;
+  document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", b.dataset.plan === which ? "true" : "false"));
+  renderPlan(which); state.__plan = which; save(); updateProgress();
+}
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => selectTab(b.dataset.plan)));
+
+/* ---------- good to know ---------- */
+document.getElementById("gtk").innerHTML = GTK.map(g => `<div><b>${esc(g[0])}</b><span>${esc(g[1])}</span></div>`).join("");
+
+/* ---------- progress ---------- */
+function updateProgress(){
+  let total = 0, done = 0;
+  TOPICS.forEach(t => {
+    const n = t.must.length; let d = 0;
+    t.must.forEach((_,i) => { if (state[t.id+"-"+i]) d++; });
+    total += n; done += d;
+    const el = document.querySelector(`[data-tp="${t.id}"]`); if (el) el.textContent = d+"/"+n;
+  });
+  LAYERS.forEach(L => {
+    let n=0,d=0;
+    TOPICS.filter(t=>t.layer===L.id).forEach(t => t.must.forEach((_,i)=>{ n++; if(state[t.id+"-"+i]) d++; }));
+    const el = document.querySelector(`[data-lp="${L.id}"]`); if (el) el.textContent = Math.round(d/n*100)+"%";
+  });
+  const pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById("pfill").style.width = pct+"%";
+  document.getElementById("ptrack").setAttribute("aria-valuenow", pct);
+  document.getElementById("pcount").textContent = done+" / "+total+" topics mastered";
+}
+
+document.addEventListener("change", e => {
+  const id = e.target && e.target.dataset && e.target.dataset.id;
+  if (!id) return;
+  if (e.target.checked) state[id] = 1; else delete state[id];
+  save(); updateProgress();
+});
+
+document.getElementById("reset").addEventListener("click", () => {
+  if (!confirm("Clear all checked items?")) return;
+  const plan = state.__plan, theme = state.__theme;
+  state = {}; if (plan) state.__plan = plan; if (theme) state.__theme = theme; save();
+  document.querySelectorAll("input[type=checkbox]").forEach(c => c.checked = false);
+  updateProgress();
+});
+
+/* ---------- theme ---------- */
+const root = document.documentElement;
+if (state.__theme) root.setAttribute("data-theme", state.__theme);
+document.getElementById("theme").addEventListener("click", () => {
+  const cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  const next = cur === "dark" ? "light" : "dark";
+  root.setAttribute("data-theme", next); state.__theme = next; save();
+});
+
+selectTab(currentPlan);
+})();
+</script>
+</body>
+</html>
